@@ -206,7 +206,7 @@ cy_stc_syspm_callback_t deepSleepCb =
  *******************************************************************************/
 int main(void)
 {
-	cy_rslt_t result;
+    cy_rslt_t result;
     uint32_t capsense_state_timeout;
     uint32_t interruptStatus;
 
@@ -572,13 +572,9 @@ static uint32_t stop_runtime_measurement()
  * Function Name: led_control
  ********************************************************************************
  * Summary:
- *  Control USER LED2 in the kit to show the button status:
- *    No touch - LED2 == OFF
- *    Touch - LED2 == ON
- *  Control USER LED3 in the kit to show different power modes:
- *    Active Mode :LED3 Blinks at a fast rate
- *    ALR Mode :LED3 Blinks at a medium rate
- *    WOT Mode :LED3 Blinks at a slow rate
+ *  Control the LEDs one the expansion board to show the button status:
+ *    No touch - LEDs == OFF
+ *    Touch - Corresponding LED == ON
  *******************************************************************************/
 void led_control()
 {

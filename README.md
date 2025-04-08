@@ -10,13 +10,13 @@ This code example demonstrates the implementation of inductive sensing based Tou
 
 ## Requirements
 
-- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.3 or later
+- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.5 or later
 
-> **Note:** This code example version requires ModusToolbox&trade; v3.3 and is not backward compatible with v3.2 or older versions.
+> **Note:** This code example version requires ModusToolbox&trade; v3.5 and is not backward compatible with older versions.
 
 - Board Support Package (BSP) minimum required version: 3.3.0
 - Programming language: C
-- Associated parts: [PSOC&trade; 4000T](https://www.infineon.com/002-33949)
+- Associated parts: [PSOC&trade; 4000T](https://www.infineon.com/002-33949), [PSOC&trade; 4100T Plus](https://www.infineon.com/002-39671)
 
 ## Supported toolchains (make variable 'TOOLCHAIN')
 
@@ -27,16 +27,24 @@ This code example demonstrates the implementation of inductive sensing based Tou
 ## Supported kits (make variable 'TARGET')
 
 - [PSOC&trade; 4000T CAPSENSE&trade; Multi-Sense Prototyping Kit](https://www.infineon.com/CY8CPROTO-040T-MS) (`CY8CPROTO-040T-MS`) - Default `TARGET`
+- [PSOC&trade; 4100T Plus CAPSENSE&trade; Prototyping Kit](https://www.infineon.com/CY8CPROTO-041TP) (`CY8CPROTO-041TP`)
 
 ## Hardware setup
 
-This example uses the board's default configuration. See the [Kit user guide](https://www.infineon.com/002-40406) to ensure that the board is configured correctly to use VDD at 3.3 V.
+This example uses the board's default configuration. See the [kit user guide](https://www.infineon.com/002-40406) to ensure that the board is configured correctly to use VDD at 3.3 V.
+
+**Table 1. Kit User guide and supported voltages**
+
+   Kit | User guide  | 1.8V | 3.3V | 5V
+   :-------- |:----------- |:----------- |:----- |:-----
+   CY8CPROTO-040T-MS| [CY8CPROTO-040T-MS PSOC&trade; 4000T CAPSENSE&trade; Multi-Sense Prototyping Kit guide](https://www.infineon.com/002-40406)  | Yes | Yes* | Yes
+   CY8CPROTO-041TP| [CY8CPROTO-041TP PSOC&trade; 4100T Plus CAPSENSE&trade; Prototyping Kit guide](https://www.infineon.com/002-40273) | Yes | Yes | Yes*
+
+   Yes* - Kit default operating voltage
 
 ## Software setup
 
 See the [ModusToolbox&trade; tools package installation guide](https://www.infineon.com/ModusToolboxInstallguide) for information about installing and configuring the tools package.
-
-This example requires [ModusToolbox™ CAPSENSE™ and Multi-Sense Pack](https://softwaretools.infineon.com/tools/com.ifx.tb.tool.modustoolboxpackmultisense) to be installed.
 
 ## Using the code example
 
@@ -149,7 +157,7 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
 ## Operation
 
-1. Connect the USB cable between the [CY8CPROTO-040T-MS Kit](https://www.infineon.com/CY8CPROTO-040T-MS) and the PC with the Keypad-2 extension board, as shown in **Figure 1**.
+1. Connect the USB cable between the kit and the PC with the Keypad-2 extension board, as shown in **Figure 1**.
 
    **Figure 1. Connecting the CY8CPROTO-040T-MS Kit with the PC**
 
@@ -186,7 +194,7 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
 3. After programming, the application starts automatically.
 
-> **Note:** After programming, you will see the following error message if the Debug mode is disabled. This can be ignored, or enabling debug will solve this error.<br>
+> **Note:** After programming, you may see the following error message if the Debug mode is disabled. This can be ignored, or enabling debug will solve this error.<br>
 
    ``` c
    "Error: Error connecting Dp: Cannot read IDR"
@@ -317,11 +325,7 @@ Use the **Apply to Device** option to set the modified parameters to the device 
  
 ## Operation at other voltages
 
-[CY8CPROTO-040T-MS Kit](https://www.infineon.com/CY8CPROTO-040T-MS) supports operating voltages of 1.8 V, 3.3 V and 5 V. See the [Kit user guide](https://www.infineon.com/002-40406) to set the preferred operating voltage and refer to the section [Setup the VDDA supply voltage and Debug mode](#set-up-the-vdda-supply-voltage-and-debug-mode-in-device-configurator).
-
-The functionalities of this application is optimally tuned for 3.3 V. Observe that the basic functionalities work across other voltages.
-
-For better performance, it is recommended to tune the application to use the preferred voltages. 
+Both [CY8CPROTO-040T-MS kit](https://www.infineon.com/002-40406) and [CY8CPROTO-041TP kit](https://www.infineon.com/002-40273) supports operating voltages of 1.8 V, 3.3 V, and 5 V. See the respective kit user guide to set the preferred operating voltage and see section [Setup the VDDA supply voltage and debug mode in Device Configurator](#set-up-the-vdda-supply-voltage-and-debug-mode-in-device-configurator).
 
 ## Tuning procedure
 
@@ -772,6 +776,7 @@ It can be calculated as follows:
    - The scan time includes the MSCLP initialization time, Cmod, and the total sub-conversions of the sensor. 
 
    - To control the Cmod initialization sequence, set the "Enable Coarse initialization bypass" configurator option as listed in the following table:
+   
    **Table 5. Enable coarse initialization bypass**
 
    Enable coarse initialization bypass | Behaviour
@@ -823,22 +828,22 @@ Update the following macros in *main.c* using the scan time calculated. The valu
 
 >**Note:** If the application has more than one widget, add the scan times of individual widgets calculated.
 
-## Debugging
+# Debugging
 
-You can debug the example to step through the code.
+You can debug this project to step through the code. In the IDE, use the **\<Application Name> Debug (KitProg3_MiniProg4)** configuration in the **Quick Panel**. For details, see the "Program and debug" section in the [Eclipse IDE for ModusToolbox&trade; user guide](https://www.infineon.com/MTBEclipseIDEUserGuide).
 
-<details><summary><b>In Eclipse IDE</b></summary>
+To enable the debug option, see the [Setup VDDA and Debug mode](#set-up-the-vdda-supply-voltage-and-debug-mode-in-device-configurator) section. To achieve low power consumption, it is recommended to disable it.
 
-Use the **\<Application Name> Debug (KitProg3_MiniProg4)** configuration in the **Quick Panel**. For more details, see the "Program and debug" section in the [Eclipse IDE for ModusToolbox&trade; user guide](https://www.infineon.com/MTBEclipseIDEUserGuide).
+See **Table 6** for the default debug configuration in the supported kits.
 
-</details>
+**Table 6. Debug mode option status**
 
+Kit  | Debug mode 
+:----| :----------
+CY8CPROTO-040T-MS | Enabled
+CY8CPROTO-041TP | Enabled
 
-<details><summary><b>In other IDEs</b></summary>
-
-Follow the instructions in your preferred IDE.
-</details>
-
+> **Note** : It is recommended to disable debug option, to achieve low power consumption.
 
 ## Design and implementation
 
@@ -893,7 +898,7 @@ The CAPSENSE&trade; data structure that contains the CAPSENSE&trade; raw data is
    <img src="images/vdda-setting.png" alt="" width=""/>
 <br>
 
-3. By default, the Debug mode is disabled for this application to reduce power consumption. Enable the Debug mode to enable SWD pins as shown in **Figure 40**.
+3. By default, the Debug mode is enabled for this application to reduce power consumption. Enable the Debug mode to enable SWD pins as shown in **Figure 40**.
 
    **Figure 40. Enable the Debug mode in the System tab of Device Configurator**
 
@@ -933,7 +938,7 @@ The CAPSENSE&trade; data structure that contains the CAPSENSE&trade; raw data is
 
 Resources  | Links
 -----------|----------------------------------
-Application notes  | [AN79953](https://www.infineon.com/AN79953) – Getting started with PSOC&trade; 4 <br>  [AN234231](https://www.infineon.com/AN234231) – PSOC&trade; 4 – Achieving lowest-power capacitive sensing with PSOC&trade; 4000T <br> [AN85951](https://www.infineon.com/AN85951) – PSOC&trade; 4 design guide <br>  [AN239751](https://www.infineon.com/AN239751) - Flyback Inductive Sensing Design Guide
+Application notes  | [AN79953](https://www.infineon.com/AN79953) – Getting started with PSOC&trade; 4 <br>  [AN234231](https://www.infineon.com/AN234231) – PSOC&trade; 4 CAPSENSE&trade; ultra-low-power capacitive sensing techniques <br> [AN85951](https://www.infineon.com/AN85951) – PSOC&trade; 4 design guide <br>  [AN239751](https://www.infineon.com/AN239751) - Flyback Inductive Sensing Design Guide
 Code examples  | [Using ModusToolbox&trade;](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub
 Device documentation |  [PSOC&trade; 4 datasheets](https://www.infineon.com/cms/en/search.html?intc=searchkwr-return#!view=downloads&term=PSOC%204&doc_group=Data%20Sheet) <br>[PSOC&trade; 4 technical reference manuals](https://www.infineon.com/cms/en/search.html#!term=PSOC%204%20technical%20reference%20manual&view=all)
 Development kits | Select your kits from the [Evaluation board finder](https://www.infineon.com/cms/en/design-support/finder-selection-tools/product-finder/evaluation-board)
@@ -957,6 +962,7 @@ Document title: *CE240147* – *PSOC&trade; 4: MSCLP Inductive Sensing Touch ove
  1.0.0   | New code example
  2.0.0   | Major update to support ModusToolbox&trade; v3.3. This version is not backward compatible with previous versions of ModusToolbox&trade;
  2.1.0   | Major update to support ModusToolbox&trade; v3.4. This version is not backward compatible with previous versions of ModusToolbox&trade;
+ 3.0.0   | Major update to support ModusToolbox&trade; v3.5. This version is not backward compatible with previous versions of ModusToolbox&trade;. Added CY8CPROTO-041TP kit support
 
 <br>
 
